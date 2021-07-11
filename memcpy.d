@@ -8,10 +8,10 @@ void memcpy(char* dest, const(char)* src, size_t count) @nogc nothrow @system
     {
         mov RCX, qwordCount;
         mov RSI, src;
+        mov RDI, dest;
         rep;
         movsq;
         mov ECX, byteCount;
-        mov RDI, dest;
         rep;
         movsb;
     }
@@ -24,12 +24,12 @@ void memset(char* dest, int c, size_t count) @nogc nothrow @system
     const _c = c * 0x0101010101010101;
     asm @nogc nothrow @system
     {
+        mov RCX, qwordCount;
         mov RDI, dest;
         mov RAX, _c;
         rep;
         stosq;
         mov ECX, byteCount;
-        mov RCX, qwordCount;
         rep;
         stosb;
     }
